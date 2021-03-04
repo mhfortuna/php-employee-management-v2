@@ -14,7 +14,7 @@
 
 - [Requirements](#requirements)
 - [Install - Run](#install---run)
-- [Technologies used :wrench:](#technologies-used-wrench)
+- [Technologies used](#technologies-used)
 - [Download project](#download-project)
 - [Usage](#usage)
 - [Based on](#based-on)
@@ -36,7 +36,7 @@ In order to complete/execute this project, the set up of a server environment an
 
 - XAMPP with PHP >= 7.4
 
-## Technologies used :wrench:
+## Technologies used
 
 \* Visual Studio Code - Developement IDE
 
