@@ -70,9 +70,9 @@ This project could be used to manage employee information.
 
 This repository is based on a past delivery from master's students:
 
-👤 **Víctor Martines**
+👤 **Víctor Martínez**
 
-👤 **Ismael Vazquez**
+👤 **Ismael Vázquez**
 
 ---
 
