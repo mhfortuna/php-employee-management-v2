@@ -1,13 +1,25 @@
 <?php
+
 /**
  * EMPLOYEE FUNCTIONS LIBRARY
  *
  * @author: Jose Manuel Orts
  * @date: 11/06/2020
  */
-session_start();
+// session_start();
 
-function getAllEmployees($path) {
+class EmployeeModel extends Model
+{
+  function get()
+  {
+    return 10;
+  }
+}
+
+
+
+function getAllEmployees($path)
+{
   $data = file_get_contents($path);
   $data = json_decode($data, true);
   return $data;
@@ -21,12 +33,12 @@ function addEmployee(array $newEmployee)
   $newEmployee["id"] = $lastId + 1;
   if (isset($newEmployee["gender"])) {
     $gender = $newEmployee["gender"];
-    for ($i=0;$i<count($gender);$i++){ 
-      $genderPost = $gender[$i]; 
+    for ($i = 0; $i < count($gender); $i++) {
+      $genderPost = $gender[$i];
     }
     $newEmployee["gender"] = $genderPost;
   }
-  $allEmployees[] = $newEmployee; 
+  $allEmployees[] = $newEmployee;
   file_put_contents("../../resources/employees.json", json_encode($allEmployees));
   return $newEmployee;
 }
@@ -35,7 +47,7 @@ function deleteEmployee($id)
 {
   $path = "../../resources/employees.json";
   $allEmployees = getAllEmployees($path);
-  foreach($allEmployees as $key => $value) {
+  foreach ($allEmployees as $key => $value) {
     if ($value['id'] == $id) {
       $employeeToDelete = $key;
     }
@@ -49,12 +61,12 @@ function deleteEmployee($id)
 
 function updateEmployee(array $updateEmployee)
 {
-  $json = file_get_contents("../../resources/employees.json"); 
+  $json = file_get_contents("../../resources/employees.json");
   $json = json_decode($json, true);
-  $gender=$_POST["gender"];
-  for ($i=0;$i<count($gender);$i++){ 
-    $genderPost = $gender[$i]; 
-  } 
+  $gender = $_POST["gender"];
+  for ($i = 0; $i < count($gender); $i++) {
+    $genderPost = $gender[$i];
+  }
   // print_r($genderPost);
   $employeeUpdate = array(
     'name' => $_POST['name'],
@@ -71,11 +83,11 @@ function updateEmployee(array $updateEmployee)
   print_r($employeeUpdate);
   $result = array();
 
-  foreach($json as $key) {
+  foreach ($json as $key) {
     if ($key['id'] === $_SESSION['employeeUpdate']['id']) {
-       $employeeUpdate['id'] = $_SESSION['employeeUpdate']['id'];
-       $key = $employeeUpdate;
-       $_SESSION['employeeUpdate'] = $key;
+      $employeeUpdate['id'] = $_SESSION['employeeUpdate']['id'];
+      $key = $employeeUpdate;
+      $_SESSION['employeeUpdate'] = $key;
     }
     array_push($result, $key);
   }
@@ -83,7 +95,7 @@ function updateEmployee(array $updateEmployee)
   fwrite($fileOpen, json_encode($result));
   fclose($fileOpen);
   //unset($_SESSION['employeeUpdate']);
-  
+
   //print_r($_SESSION['employeeUpdate']);
   header("Location: ../employee.php?okUpdate=true");
 }
@@ -92,15 +104,15 @@ function updateEmployee(array $updateEmployee)
 function getEmployee(string $id)
 {
 
-  $json = file_get_contents("../../resources/employees.json"); 
+  $json = file_get_contents("../../resources/employees.json");
   $json = json_decode($json, true);
-  foreach($json as $key => $value) {
+  foreach ($json as $key => $value) {
     if ($value['id'] == $id) {
-      if(!isset($value['lastName'])){
-        $value['lastName']="";
+      if (!isset($value['lastName'])) {
+        $value['lastName'] = "";
       }
-      if(!isset($value['gender'])){
-        $value['gender']="";
+      if (!isset($value['gender'])) {
+        $value['gender'] = "";
       }
       var_dump($value);
       $_SESSION['employeeUpdate'] = $value;
@@ -112,17 +124,11 @@ function getEmployee(string $id)
 
 function removeAvatar($id)
 {
-// TODO implement it
+  // TODO implement it
 }
 
-
-// function getQueryStringParameters(): array
-// {
-// // TODO implement it
-// }
-
-function getNextIdentifier(array $employeesCollection) 
-{   
+function getNextIdentifier(array $employeesCollection)
+{
   $object = array_reduce($employeesCollection, function ($a, $b) {
     return $a ? ($a["id"] > $b["id"] ? $a : $b) : $b;
   });
