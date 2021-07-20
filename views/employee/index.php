@@ -7,6 +7,7 @@
 //   header("Location : ../index.php");
 // }
 echo "Creating employee OK";
+echo isset($this->employee) ? $this->employee : "No employee";
 ?>
 
 

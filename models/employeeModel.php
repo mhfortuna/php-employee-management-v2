@@ -38,7 +38,20 @@ class EmployeeModel extends Model
 
     }
 
+    function getById($id) {
+    //Create instance of DataBase object and call connected method
+
+        // define the query to get the employee by id
+    //...
+    // For query success:
+    $employee = $id;
+    return $employee;
+
+  }
+
+
 }
+
 
 
 

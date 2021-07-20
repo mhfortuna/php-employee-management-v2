@@ -53,30 +53,37 @@ class EmployeeController extends Controller
     $this->view->render('dashboard');
   }
 
-  function createEmployee() {
+  function createEmployee()
+  {
     if (!empty($_POST)) {
-      // $name = $_POST['name'];
-      // $lastName = $_POST['lastName'];
-      // $email = $_POST['email'];
-      // $gender = $_POST['gender'];
-      // $age = $_POST['age'];
-      // $city = $_POST['city'];
-      // $streetAddress = $_POST['streetAddress'];
-      // $state = $_POST['state'];
-      // $postalCode = $_POST['postalCode'];
-      // $phoneNumber = $_POST['phoneNumber'];
-
       //Goes to create model function insert
       $result = $this->model->insert($_POST);
       if ($result) {
-          $message = 'New content created';
+        $message = 'New content created';
       } else {
-          $message = 'Error creating the employee';
+        $message = 'Error creating the employee';
       }
       $this->view->message = $message;
+    }
+    $this->view->render('employee');
+    // $this->render("create");
   }
-  $this->view->render('employee');
-  // $this->render("create");
-}
 
+  function getByIdEmployee($id)
+  {
+    $result = $this->model->getById($id[0]);
+    if ($result) {
+      $message = 'New content created';
+    } else {
+      $message = 'Error getting the employee';
+      $this->view->message = $message;
+    }
+    $this->view->employee = $result;
+
+    $this->view->render('employee');
+  }
+
+  function updateEmployee($id)
+  {
+  }
 }
