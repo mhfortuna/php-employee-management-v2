@@ -1,14 +1,17 @@
 <!-- TODO Employee view -->
 <?php
-session_start();
-require_once('./library/sessionHelper.php');
-checkExpiredSession();
-if(!isset($_SESSION)){
-  header("Location : ../index.php");
-}
+// session_start();
+// require_once('./library/sessionHelper.php');
+// checkExpiredSession();
+// if(!isset($_SESSION)){
+//   header("Location : ../index.php");
+// }
+echo "Creating employee OK";
 ?>
 
-<!DOCTYPE html>
+
+
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -199,4 +202,4 @@ if(!isset($_SESSION)){
   </footer>
   <!-- <script src="../assets/js/index.js"></script> -->
 </body>
-</html>
+</html> -->

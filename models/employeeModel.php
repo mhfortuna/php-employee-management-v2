@@ -14,6 +14,30 @@ class EmployeeModel extends Model
   {
     return 10;
   }
+
+  function insert($employeeArray){
+    //Create instance of DataBase object and call connected method
+
+    $name = $employeeArray['name'];
+    $lastName = $employeeArray['lastName'];
+    $email = $employeeArray['email'];
+    $gender = $employeeArray['gender'];
+    $age = $employeeArray['age'];
+    $city = $employeeArray['city'];
+    $streetAddress = $employeeArray['streetAddress'];
+    $state = $employeeArray['state'];
+    $postalCode = $employeeArray['postalCode'];
+    $phoneNumber = $employeeArray['phoneNumber'];
+
+    // define the query to add the employee into the table
+    //...
+    // For query success:
+    return true;
+
+    // Destruct to close connection
+
+    }
+
 }
 
 
