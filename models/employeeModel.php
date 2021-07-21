@@ -46,7 +46,7 @@ class EmployeeModel extends Model
     // define the query to get the employee by id
     //...
     // For query success:
-    $employee = $id;
+    $employee = ['name' => 'Mathias', 'lastName' => 'Fortuna', 'gender' => 'man', 'city' => 'Buenos Aires'];
     return $employee;
   }
 
