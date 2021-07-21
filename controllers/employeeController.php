@@ -42,6 +42,12 @@
 // echo json_encode($result);
 class EmployeeController extends Controller
 {
+  public function __call($method, $arguments)
+  {
+    // Method called when no method matches the one passed
+    return false;
+  }
+
   public function defaultMethod()
   {
     $this->getContent();
@@ -85,5 +91,26 @@ class EmployeeController extends Controller
 
   function updateEmployee($id)
   {
+    if (!empty($_POST)) {
+      $result = $this->model->update($id[0], $_POST = []);
+      if ($result) {
+        $message = 'Updated employee';
+      } else {
+        $message = 'Error updating the employee';
+      }
+      $this->view->message = $message;
+    }
+    $this->view->render('employee');
+  }
+
+  function deleteEmployee($id)
+  {
+    $result = $this->model->delete($id[0]);
+    if ($result) {
+      $message = 'Deleted employee';
+    } else {
+      $message = 'Error deleting the employee';
+    }
+    $this->view->message = $message;
   }
 }
