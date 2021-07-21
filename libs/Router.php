@@ -14,10 +14,10 @@ class Router
 
         // When there is no controller in the URL
         if ($url === null || $url[0] == "main") {
-            $urlOfController = CONTROLLERS . '/' . 'LoginController.php';
+            $urlOfController = CONTROLLERS . '/' . 'userController.php';
             require_once($urlOfController);
-            $controller = new LoginController();
-            $controller->loadModel('loginModel');
+            $controller = new UserController();
+            $controller->loadModel('user');
             $controller->view->render('login');
             return false;
         }
