@@ -1,28 +1,13 @@
 <div class="card-header d-flex align-items-center">
   <div class="d-flex mr-5">
-    <img
-      class="mr-2"
-      src="../node_modules/bootstrap-icons/icons/file-earmark-person.svg"
-      alt=""
-      width="20"
-      height="20"
-    />
+    <img class="mr-2" src="../../node_modules/bootstrap-icons/icons/file-earmark-person.svg" alt="" width="20" height="20" />
     <h6 class="m-0">Employees Management</h6>
   </div>
   <div class="d-flex">
     <a href="dashboard.php" class="mr-2 nav" id="dashboard">Dashboard</a>
-    <a
-      href="./library/sessionHelper.php?destroyUpdate=true"
-      class="mr-2 nav"
-      id="employee"
-      >Employee</a
-    >
+    <a href="./library/sessionHelper.php?destroyUpdate=true" class="mr-2 nav" id="employee">Employee</a>
   </div>
-  <a
-    href="../src/library/loginController.php?logOut"
-    class="ml-auto text-muted justify-self-end"
-    >Logout</a
-  >
+  <a href="../src/library/loginController.php?logOut" class="ml-auto text-muted justify-self-end">Logout</a>
 </div>
 
 <script>

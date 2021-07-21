@@ -15,7 +15,8 @@ class EmployeeModel extends Model
     return 10;
   }
 
-  function insert($employeeArray){
+  function insert($employeeArray)
+  {
     //Create instance of DataBase object and call connected method
 
     $name = $employeeArray['name'];
@@ -36,20 +37,40 @@ class EmployeeModel extends Model
 
     // Destruct to close connection
 
-    }
+  }
 
-    function getById($id) {
+  function getById(int $id)
+  {
     //Create instance of DataBase object and call connected method
 
-        // define the query to get the employee by id
+    // define the query to get the employee by id
+    //...
+    // For query success:
+    $employee = ['name' => 'Mathias', 'lastName' => 'Fortuna', 'gender' => 'man', 'city' => 'Buenos Aires'];
+    return $employee;
+  }
+
+  function update(int $id, $employeeArray = [])
+  {
+    //Create instance of DataBase object and call connected method
+
+    // define the query to update the employee by id
     //...
     // For query success:
     $employee = $id;
     return $employee;
-
   }
 
+  function delete(int $id)
+  {
+    //Create instance of DataBase object and call connected method
 
+    // define the query to update the employee by id
+    //...
+    // For query success:
+    $employee = $id;
+    return $employee;
+  }
 }
 
 

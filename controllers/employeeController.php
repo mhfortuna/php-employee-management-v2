@@ -42,6 +42,12 @@
 // echo json_encode($result);
 class EmployeeController extends Controller
 {
+  public function __call($method, $arguments)
+  {
+    // Method called when no method matches the one passed
+    return false;
+  }
+
   public function defaultMethod()
   {
     $this->getContent();
@@ -60,10 +66,13 @@ class EmployeeController extends Controller
       $result = $this->model->insert($_POST);
       if ($result) {
         $message = 'New content created';
+        $messageType = 'success';
       } else {
         $message = 'Error creating the employee';
+        $messageType = 'error';
       }
       $this->view->message = $message;
+      $this->view->messageType = $messageType;
     }
     $this->view->render('employee');
     // $this->render("create");
@@ -71,13 +80,16 @@ class EmployeeController extends Controller
 
   function getByIdEmployee($id)
   {
-    $result = $this->model->getById($id[0]);
+    $result = $this->model->getById(($id[0]));
     if ($result) {
       $message = 'New content created';
+      $messageType = 'success';
     } else {
       $message = 'Error getting the employee';
-      $this->view->message = $message;
+      $messageType = 'error';
     }
+    $this->view->message = $message;
+    $this->view->messageType = $messageType;
     $this->view->employee = $result;
 
     $this->view->render('employee');
@@ -85,5 +97,32 @@ class EmployeeController extends Controller
 
   function updateEmployee($id)
   {
+    if (!empty($_POST)) {
+      $result = $this->model->update($id[0], $_POST = []);
+      if ($result) {
+        $message = 'Updated employee';
+        $messageType = 'success';
+      } else {
+        $message = 'Error updating the employee';
+        $messageType = 'error';
+      }
+      $this->view->message = $message;
+      $this->view->messageType = $messageType;
+    }
+    $this->view->render('employee');
+  }
+
+  function deleteEmployee($id)
+  {
+    $result = $this->model->delete($id[0]);
+    if ($result) {
+      $message = 'Deleted employee';
+      $messageType = 'success';
+    } else {
+      $message = 'Error deleting the employee';
+      $messageType = 'error';
+    }
+    $this->view->message = $message;
+    $this->view->messageType = $messageType;
   }
 }
