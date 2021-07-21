@@ -32,14 +32,16 @@ class UserController extends Controller
           if ($login) {
                $this->view->render('dashboard');
           } else {
-               $this->view->messageError = "Wrong email or password";
+               $this->view->messageType = "error";
+               $this->view->message = "Wrong email or password";
                $this->view->render('login');
           }
      }
 
      public function logoutUser() {
           // $login = $this->model->logout();
-          $this->view->messageLogout = "Wrong email or password";
+          $this->view->messageType = "success";
+          $this->view->message = "Logout successfully";
           $this->view->render('login');
      }
 }

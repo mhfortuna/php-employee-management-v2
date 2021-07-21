@@ -24,11 +24,11 @@
       Sign in
     </button>
     <?php
-    if (isset($this->messageError)) {
-      echo "<div class='alert alert-danger'> <h3>Wrong email or password.</h3></div>";
+    if ((isset($this->messageType)) && ($this->messageType === 'error')) {
+      echo "<div class='alert alert-danger'> <h3>$this->message</h3></div>";
     }
-    if (isset($this->messageLogout)) {
-      echo "<div class='alert alert-success'> <h3>Logout successfully</h3></div>";
+    if ((isset($this->messageType)) && ($this->messageType === 'success')) {
+      echo "<div class='alert alert-success'> <h3>$this->message</h3></div>";
     }
     ?>
     <p class="mt-5 mb-3 text-muted">PHP Employee Management</p>
