@@ -28,7 +28,7 @@
     ?>
   </header>
   <main class="container-xl mx-auto pb-90">
-    <form action="./library/employeeController.php?update=true" method="POST" class="container-md">
+    <form action=" <?= isset($this->employee['id']) ? '/employee/update/' . $this->employee['id'] : '' ?>" method="POST" class="container-md">
       <?php
       if (isset($_GET['okUpdate'])) {
         if ($_GET['okUpdate'] == true) {
@@ -41,7 +41,7 @@
         <div class="col">
           <div class="form-group">
             <label for="inputName">Name</label>
-            <input name="name" type="text" class="form-control" id="inputName" value="<?= isset($this->employee['name']) ? $this->employee['name'] : '' ?>">
+            <input name="name" type="text" class="form-control" id="inputName" value="<?= isset($this->employee['first_name']) ? $this->employee['first_name'] : '' ?>">
           </div>
           <div class="form-group">
             <label for="inputMail">Email address</label>
@@ -58,13 +58,13 @@
           </div>
           <div class="form-group">
             <label for="inputPostalCode">Postal Code</label>
-            <input name="postalCode" type="number" class="form-control" id="inputPostalCode" value="<?= isset($this->employee['postalCode']) ? $this->employee['postalCode'] : '' ?>">
+            <input name="postalCode" type="number" class="form-control" id="inputPostalCode" value="<?= isset($this->employee['postal_code']) ? $this->employee['postal_code'] : '' ?>">
           </div>
         </div>
         <div class="col">
           <div class="form-group">
             <label for="inputLastName">Last Name</label>
-            <input name="lastName" type="text" class="form-control" id="inputLastName" value="<?= isset($this->employee['lastName']) ? $this->employee['lastName'] : '' ?>">
+            <input name="lastName" type="text" class="form-control" id="inputLastName" value="<?= isset($this->employee['last_name']) ? $this->employee['last_name'] : '' ?>">
           </div>
           <div class="form-group">
             <label for="inputGender">Example select</label>
@@ -81,7 +81,7 @@
           </div>
           <div class="form-group">
             <label for="inputStreetAddress">Street Address</label>
-            <input name="streetAddress" type="text" class="form-control" id="inputStreetAddress" value="<?= isset($this->employee['streetAddress']) ? $this->employee['streetAddress'] : '' ?>">
+            <input name="streetAddress" type="text" class="form-control" id="inputStreetAddress" value="<?= isset($this->employee['street_number']) ? $this->employee['street_number'] : '' ?>">
           </div>
           <div class="form-group">
             <label for="inputAge">Age</label>
@@ -89,7 +89,7 @@
           </div>
           <div class="form-group">
             <label for="inputPhoneNumber">Phone Number</label>
-            <input name="phoneNumber" type="number" class="form-control" id="inputPhoneNumber" value="<?= isset($this->employee['phoneNumber']) ? $this->employee['phoneNumber'] : '' ?>">
+            <input name="phoneNumber" type="number" class="form-control" id="inputPhoneNumber" value="<?= isset($this->employee['phone_number']) ? $this->employee['phone_number'] : '' ?>">
           </div>
         </div>
       </div>
