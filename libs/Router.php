@@ -18,7 +18,8 @@ class Router
             require_once($urlOfController);
             $controller = new UserController();
             $controller->loadModel('user');
-            $controller->view->render('login');
+            // $controller->view->render('login');
+            $controller->defaultMethod();
             return false;
         }
 
