@@ -15,18 +15,7 @@ class EmployeeModel extends Model
     try {
       $query = $this->db->connect()->prepare("SELECT id, first_name, email, age, street_number, city, state, postal_code, phone_number FROM employee;");
       $query->execute();
-      while ($row = $query->fetch()) {
-        // $item = new Content();
-
-        // $item->id = $row['id'];
-        // $item->name = $row['name'];
-        // $item->email = $row['email'];
-        // $item->text = $row['text'];
-
-        // array_push($items, $item);
-      }
-
-      // return $items;
+      return $query->fetchAll(PDO::FETCH_ASSOC);
     } catch (PDOException $e) {
       echo $e;
     }
@@ -67,33 +56,7 @@ class EmployeeModel extends Model
     }
 
 
-
-
-
-
-
-
-
-
-    //Create instance of DataBase object and call connected method
-
-    $name = $employeeArray['name'];
-    $lastName = $employeeArray['lastName'];
-    $email = $employeeArray['email'];
-    $gender = $employeeArray['gender'];
-    $age = $employeeArray['age'];
-    $city = $employeeArray['city'];
-    $streetAddress = $employeeArray['streetAddress'];
-    $state = $employeeArray['state'];
-    $postalCode = $employeeArray['postalCode'];
-    $phoneNumber = $employeeArray['phoneNumber'];
-
-    // define the query to add the employee into the table
-    //...
-    // For query success:
-    return true;
-
-    // Destruct to close connection
+    //! Destruct to close connection
 
   }
 
@@ -137,6 +100,24 @@ class EmployeeModel extends Model
 
   function delete(int $id)
   {
+    try {
+      $query = $this->db->connect()->prepare("DELETE FROM employee WHERE id = {$id};");
+      $query->execute();
+      if (($query->rowCount()) > 0) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (PDOException $e) {
+      return $e->getMessage();
+    }
+
+
+
+
+
+
+
     //Create instance of DataBase object and call connected method
 
     // define the query to update the employee by id
