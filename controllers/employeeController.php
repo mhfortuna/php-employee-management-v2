@@ -65,14 +65,13 @@ class EmployeeController extends Controller
       //Goes to create model function insert
       $result = $this->model->insert($_POST);
       if ($result) {
-        $message = 'New content created';
-        $messageType = 'success';
+        header('Location: ./employee');
       } else {
-        $message = 'Error creating the employee';
+        $message = $result;
         $messageType = 'error';
+        $this->view->message = $message;
+        $this->view->messageType = $messageType;
       }
-      $this->view->message = $message;
-      $this->view->messageType = $messageType;
     }
     $this->view->render('employee');
     // $this->render("create");
@@ -80,36 +79,38 @@ class EmployeeController extends Controller
 
   function getByIdEmployee($id)
   {
-    $result = $this->model->getById(($id[0]));
-    if ($result) {
-      $message = 'New content created';
-      $messageType = 'success';
+    // if (empty($_POST)) {
+    $result = $this->model->getById($id[0]);
+    if (is_array($result)) {
+      $this->view->employee = $result;
     } else {
-      $message = 'Error getting the employee';
+      $message =  $result;
       $messageType = 'error';
+      $this->view->message = $message;
+      $this->view->messageType = $messageType;
     }
-    $this->view->message = $message;
-    $this->view->messageType = $messageType;
-    $this->view->employee = $result;
 
     $this->view->render('employee');
+    // } else {
+    //   $this->updateEmployee($id);
+    // }
   }
 
   function updateEmployee($id)
   {
     if (!empty($_POST)) {
-      $result = $this->model->update($id[0], $_POST = []);
-      if ($result) {
+      $result = $this->model->update($id[0], $_POST);
+      if ($result === true) {
         $message = 'Updated employee';
         $messageType = 'success';
       } else {
-        $message = 'Error updating the employee';
+        $message = $result;
         $messageType = 'error';
       }
       $this->view->message = $message;
       $this->view->messageType = $messageType;
     }
-    $this->view->render('employee');
+    $this->getByIdEmployee($id);
   }
 
   function deleteEmployee($id)

@@ -4,8 +4,8 @@
     <h6 class="m-0">Employees Management</h6>
   </div>
   <div class="d-flex">
-    <a href="dashboard.php" class="mr-2 nav" id="dashboard">Dashboard</a>
-    <a href="./library/sessionHelper.php?destroyUpdate=true" class="mr-2 nav" id="employee">Employee</a>
+    <a href="<?= BASE_URL ?>employee" class="mr-2 nav" id="dashboard">Dashboard</a>
+    <a href="<?= BASE_URL ?>employee/create" class="mr-2 nav" id="employee">Employee</a>
   </div>
   <a href="user/logout" class="ml-auto text-muted justify-self-end">Logout</a>
 </div>
