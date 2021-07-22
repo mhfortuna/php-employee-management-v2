@@ -7,7 +7,6 @@ class Router
     {
         // URL position [0] it's for controllers
         // URL position [1] it's for methods
-        // After that for arguments
 
         // We can GET the URL because we specified this in the htaccess
         $url = isset($_GET['url']) ? explode('/', rtrim($_GET['url'], '/')) : null;
