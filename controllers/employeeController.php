@@ -65,7 +65,7 @@ class EmployeeController extends Controller
       //Goes to create model function insert
       $result = $this->model->insert($_POST);
       if ($result) {
-        header('Location: /employee');
+        header('Location: ./employee');
       } else {
         $message = $result;
         $messageType = 'error';
