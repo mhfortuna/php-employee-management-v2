@@ -7,7 +7,7 @@
     <a href="dashboard.php" class="mr-2 nav" id="dashboard">Dashboard</a>
     <a href="./library/sessionHelper.php?destroyUpdate=true" class="mr-2 nav" id="employee">Employee</a>
   </div>
-  <a href="../src/library/loginController.php?logOut" class="ml-auto text-muted justify-self-end">Logout</a>
+  <a href="user/logout" class="ml-auto text-muted justify-self-end">Logout</a>
 </div>
 
 <script>
