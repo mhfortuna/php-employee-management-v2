@@ -11,7 +11,7 @@ class UserController extends Controller
           if (!empty($_POST)) {
                $login = $this->model->login();
                if ($login) {
-                    header('Location: ./employee');
+                    header('Location: ' . BASE_URL . 'employee');
                } else {
                     $this->view->messageType = "error";
                     $this->view->message = "Wrong email or password";
