@@ -65,14 +65,13 @@ class EmployeeController extends Controller
       //Goes to create model function insert
       $result = $this->model->insert($_POST);
       if ($result) {
-        $message = 'New content created';
-        $messageType = 'success';
+        header('Location: /employee');
       } else {
-        $message = 'Error creating the employee';
+        $message = $result;
         $messageType = 'error';
+        $this->view->message = $message;
+        $this->view->messageType = $messageType;
       }
-      $this->view->message = $message;
-      $this->view->messageType = $messageType;
     }
     $this->view->render('employee');
     // $this->render("create");
@@ -80,6 +79,7 @@ class EmployeeController extends Controller
 
   function getByIdEmployee($id)
   {
+    // if (empty($_POST)) {
     $result = $this->model->getById($id[0]);
     if (is_array($result)) {
       $this->view->employee = $result;
@@ -91,6 +91,9 @@ class EmployeeController extends Controller
     }
 
     $this->view->render('employee');
+    // } else {
+    //   $this->updateEmployee($id);
+    // }
   }
 
   function updateEmployee($id)
