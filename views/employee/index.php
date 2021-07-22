@@ -28,7 +28,7 @@
     ?>
   </header>
   <main class="container-xl mx-auto pb-90">
-    <form action="./library/employeeController.php?update=true" method="POST" class="container-md">
+    <form action="" method="POST" class="container-md">
       <?php
       if (isset($_GET['okUpdate'])) {
         if ($_GET['okUpdate'] == true) {

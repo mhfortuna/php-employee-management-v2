@@ -96,18 +96,18 @@ class EmployeeController extends Controller
   function updateEmployee($id)
   {
     if (!empty($_POST)) {
-      $result = $this->model->update($id[0], $_POST = []);
-      if ($result) {
+      $result = $this->model->update($id[0], $_POST);
+      if ($result === true) {
         $message = 'Updated employee';
         $messageType = 'success';
       } else {
-        $message = 'Error updating the employee';
+        $message = $result;
         $messageType = 'error';
       }
       $this->view->message = $message;
       $this->view->messageType = $messageType;
     }
-    $this->view->render('employee');
+    $this->getByIdEmployee($id);
   }
 
   function deleteEmployee($id)

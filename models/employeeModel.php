@@ -70,6 +70,35 @@ class EmployeeModel extends Model
 
   function update(int $id, $employeeArray = [])
   {
+    try {
+      $request = "
+      UPDATE employee
+      SET 
+        first_name = '{$employeeArray['name']}',
+        last_name = '{$employeeArray['lastName']}',
+        email = '{$employeeArray['email']}',
+        gender = '{$employeeArray['gender'][0]}',
+        city = '{$employeeArray['city']}',
+        street_number = '{$employeeArray['streetAddress']}',
+        state = '{$employeeArray['state']}',
+        age = {$employeeArray['age']},
+        postal_code = '{$employeeArray['postalCode']}',
+        phone_number = '{$employeeArray['phoneNumber']}'
+      WHERE id = {$id};
+      ";
+      $query = $this->db->connect()->prepare($request);
+      $query->execute();
+      return true;
+    } catch (PDOException $e) {
+      return $e->getMessage();
+    }
+
+
+
+
+
+
+
     //Create instance of DataBase object and call connected method
 
     // define the query to update the employee by id
