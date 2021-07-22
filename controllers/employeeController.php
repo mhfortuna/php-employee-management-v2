@@ -80,17 +80,15 @@ class EmployeeController extends Controller
 
   function getByIdEmployee($id)
   {
-    $result = $this->model->getById(($id[0]));
-    if ($result) {
-      $message = 'New content created';
-      $messageType = 'success';
+    $result = $this->model->getById($id[0]);
+    if (is_array($result)) {
+      $this->view->employee = $result;
     } else {
-      $message = 'Error getting the employee';
+      $message =  $result;
       $messageType = 'error';
+      $this->view->message = $message;
+      $this->view->messageType = $messageType;
     }
-    $this->view->message = $message;
-    $this->view->messageType = $messageType;
-    $this->view->employee = $result;
 
     $this->view->render('employee');
   }

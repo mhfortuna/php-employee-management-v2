@@ -12,7 +12,24 @@ class EmployeeModel extends Model
 {
   function get()
   {
-    return 10;
+    try {
+      $query = $this->db->connect()->prepare("SELECT id, first_name, email, age, street_number, city, state, postal_code, phone_number FROM employee;");
+      $query->execute();
+      while ($row = $query->fetch()) {
+        // $item = new Content();
+
+        // $item->id = $row['id'];
+        // $item->name = $row['name'];
+        // $item->email = $row['email'];
+        // $item->text = $row['text'];
+
+        // array_push($items, $item);
+      }
+
+      // return $items;
+    } catch (PDOException $e) {
+      echo $e;
+    }
   }
 
   function insert($employeeArray)
@@ -41,13 +58,14 @@ class EmployeeModel extends Model
 
   function getById(int $id)
   {
-    //Create instance of DataBase object and call connected method
-
-    // define the query to get the employee by id
-    //...
-    // For query success:
-    $employee = ['name' => 'Mathias', 'lastName' => 'Fortuna', 'gender' => 'man', 'city' => 'Buenos Aires'];
-    return $employee;
+    try {
+      $query = $this->db->connect()->prepare("SELECT * FROM employee WHERE id = {$id};");
+      $query->execute();
+      $result = $query->fetch();
+      return $result;
+    } catch (PDOException $e) {
+      return $e->getMessage();
+    }
   }
 
   function update(int $id, $employeeArray = [])
