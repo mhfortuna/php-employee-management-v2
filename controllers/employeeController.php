@@ -1,45 +1,4 @@
 <?php
-// require("./employeeManager.php");
-// $method = $_SERVER['REQUEST_METHOD'];
-// $path = "../../resources/employees.json";
-
-
-// switch ($method) {
-//   case "POST":
-//     if(!isset($_GET['update'])){
-//       $newEmployee = $_POST;
-//       $result = addEmployee($newEmployee);
-//       break;
-//     }
-//     if($_GET["update"] == true && isset($_SESSION['employeeUpdate'])){
-//       updateEmployee($_SESSION['employeeUpdate'],$_POST);
-//       break;
-//     }
-//     if($_GET["update"] == true && !isset($_SESSION['employeeUpdate'])){
-//       $newEmployee = $_POST;
-//       $result = addEmployee($newEmployee);
-//       $_SESSION['newEmployee'] = $result;
-//       header("Location: ../employee.php?okUpdate=true");
-//       break;
-//     }
-//     break;
-
-//   case 'GET':
-//     if($_GET["ID"]){
-//       $idEmployee = $_GET['ID'];
-//       getEmployee($idEmployee);
-//     }
-//     break;
-
-//   case "DELETE":
-//     parse_str(file_get_contents("php://input"), $_DELETE);
-//     $employeeID = $_DELETE['id'];
-//     $result = deleteEmployee($employeeID);
-//     break;
-// }
-
-// header("Content-Type: application/json");
-// echo json_encode($result);
 class EmployeeController extends Controller
 {
   public function __call($method, $arguments)
@@ -48,38 +7,51 @@ class EmployeeController extends Controller
     return false;
   }
 
-  public function defaultMethod()
+  public function defaultMethod(bool $isAjaxRequest)
   {
-    $this->getContent();
+    $this->getContent($isAjaxRequest);
   }
-  function getContent()
+  function getContent(bool $isAjaxRequest)
   {
     $contents = $this->model->get();
-    $this->view->contents = $contents; // This data will be used in the view
-    $this->view->render('dashboard');
+    if ($isAjaxRequest) {
+      http_response_code(200);
+      header("Content-Type: application/json");
+      echo json_encode($contents);
+    } else {
+      $this->view->contents = $contents; // This data will be used in the view
+      $this->view->render('dashboard');
+    }
   }
 
-  function createEmployee()
+  function createEmployee(bool $isAjaxRequest)
   {
-    if (!empty($_POST)) {
-      //Goes to create model function insert
-      $result = $this->model->insert($_POST);
-      if ($result) {
-        header('Location: ./employee');
+    if ($isAjaxRequest && $_SERVER['REQUEST_METHOD'] === 'POST') {
+      $result = $this->model->insertByAjax($_POST);
+      if ($result === true) {
+        http_response_code(200);
       } else {
-        $message = $result;
-        $messageType = 'error';
-        $this->view->message = $message;
-        $this->view->messageType = $messageType;
+        http_response_code(400);
+        echo $result;
       }
+    } else {
+      if (!empty($_POST)) {
+        $result = $this->model->insert($_POST);
+        if ($result) {
+          header('Location: ./employee');
+        } else {
+          $message = $result;
+          $messageType = 'error';
+          $this->view->message = $message;
+          $this->view->messageType = $messageType;
+        }
+      }
+      $this->view->render('employee');
     }
-    $this->view->render('employee');
-    // $this->render("create");
   }
 
   function getByIdEmployee($id)
   {
-    // if (empty($_POST)) {
     $result = $this->model->getById($id[0]);
     if (is_array($result)) {
       $this->view->employee = $result;
@@ -91,9 +63,6 @@ class EmployeeController extends Controller
     }
 
     $this->view->render('employee');
-    // } else {
-    //   $this->updateEmployee($id);
-    // }
   }
 
   function updateEmployee($id)
@@ -113,17 +82,21 @@ class EmployeeController extends Controller
     $this->getByIdEmployee($id);
   }
 
-  function deleteEmployee($id)
+  function deleteEmployee($params)
   {
-    $result = $this->model->delete($id[0]);
-    if ($result) {
-      $message = 'Deleted employee';
-      $messageType = 'success';
-    } else {
-      $message = 'Error deleting the employee';
-      $messageType = 'error';
+    $id = $params[0];
+    $isAjaxRequest = $params[count($params) - 1];
+    if ($isAjaxRequest && $_SERVER['REQUEST_METHOD'] === 'DELETE') {
+
+      $result = $this->model->delete($id);
+      if ($result === true) {
+        http_response_code(200);
+      } elseif ($result === false) {
+        http_response_code(400);
+      } else {
+        http_response_code(400);
+        echo $result;
+      }
     }
-    $this->view->message = $message;
-    $this->view->messageType = $messageType;
   }
 }
