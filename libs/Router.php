@@ -18,14 +18,13 @@ class Router
             require_once($urlOfController);
             $controller = new UserController();
             $controller->loadModel('user');
-            // $controller->view->render('login');
             $controller->defaultMethod();
             return false;
         }
 
-        $class = ucfirst($url[0]); // example: employee to Employee
-        $urlOfController = CONTROLLERS . '/' . $class . 'Controller.php'; // CONTROLLERS/EmployeeController
-        $classController = $class . 'Controller'; // EmployeeController
+        $class = ucfirst($url[0]);
+        $urlOfController = CONTROLLERS . '/' . $class . 'Controller.php';
+        $classController = $class . 'Controller';
         $isAjaxRequest = getAllHeaders()['Sec-Fetch-Mode'] !== 'navigate'; // Verifying if its ajax request or not
 
 

@@ -31,8 +31,10 @@ $("#jsGrid").jsGrid({
     insertItem: function (item) {
       return $.ajax({
         type: "POST",
-        url: "./library/employeeController.php",
+        url: "./employee/create",
         data: item,
+      }).done(() => {
+        $("#jsGrid").jsGrid("loadData");
       });
     },
     deleteItem: function (item) {
