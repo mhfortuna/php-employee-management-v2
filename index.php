@@ -1,6 +1,5 @@
 <?php
 
-// require 'views/login/index.php';
 require_once 'config/baseConstants.php';
 require_once 'config/constants.php';
 require_once 'config/db.php';

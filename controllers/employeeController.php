@@ -9,9 +9,9 @@ class EmployeeController extends Controller
 
   public function defaultMethod(bool $isAjaxRequest)
   {
-    $this->getContent($isAjaxRequest);
+    $this->getEmployees($isAjaxRequest);
   }
-  function getContent(bool $isAjaxRequest)
+  function getEmployees(bool $isAjaxRequest)
   {
     $contents = $this->model->get();
     if ($isAjaxRequest) {
@@ -19,7 +19,6 @@ class EmployeeController extends Controller
       header("Content-Type: application/json");
       echo json_encode($contents);
     } else {
-      $this->view->contents = $contents; // This data will be used in the view
       $this->view->render('dashboard');
     }
   }

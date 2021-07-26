@@ -1,13 +1,3 @@
-<!-- TODO Main view or Employees Grid View here is where you get when logged here there's the grid of employees -->
-
-<?php
-/* session_start();
-  require_once('./library/sessionHelper.php');
-  checkExpiredSession();
-  if(!isset($_SESSION)){
-    header("Location : ../index.php");
-  } */
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -29,7 +19,6 @@
   <script src="node_modules/jsgrid/src/jsgrid.validation.js"></script>
   <script src="node_modules/jsgrid/src/jsgrid.field.js"></script>
   <script src="node_modules/jsgrid/src/fields/jsgrid.field.text.js"></script>
-  <!-- <script src="node_modules/jsgrid/src/fields/jsgrid.field.select.js"></script> -->
   <script src="node_modules/jsgrid/src/fields/jsgrid.field.number.js"></script>
   <script src="node_modules/jsgrid/src/fields/jsgrid.field.checkbox.js"></script>
   <script src="node_modules/jsgrid/src/fields/jsgrid.field.control.js"></script>

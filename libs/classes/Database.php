@@ -38,7 +38,6 @@ class Database
         } catch (PDOException $e) {
             //Define the view for db error
             $this->message = "Error connecting to the database";
-            //include VIEWS . '/error/dbError.php';
         }
     }
 }

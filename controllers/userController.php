@@ -27,9 +27,6 @@ class UserController extends Controller
      {
           if (empty($_POST)) {
                SessionHelper::logout(false);
-               // $this->view->messageType = "success";
-               // $this->view->message = "Logout successfully";
-               // $this->view->render('login');
           } else {
                $this->loginUser();
           }

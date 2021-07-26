@@ -95,7 +95,6 @@
     require_once VIEWS . '/header.php';
     ?>
   </footer>
-  <!-- <script src="public/assets/js/index.js"></script> -->
 </body>
 
 </html>
