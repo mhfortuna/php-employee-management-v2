@@ -1,12 +1,16 @@
 <?php
 class EmployeeModel extends Model
 {
+  function __destruct()
+  {
+    $this->query = null;
+  }
   function get()
   {
     try {
-      $query = $this->db->connect()->prepare("SELECT id, first_name, email, age, street_number, city, state, postal_code, phone_number FROM employee;");
-      $query->execute();
-      return $query->fetchAll(PDO::FETCH_ASSOC);
+      $this->query = $this->db->connect()->prepare("SELECT id, first_name, email, age, street_number, city, state, postal_code, phone_number FROM employee;");
+      $this->query->execute();
+      return $this->query->fetchAll(PDO::FETCH_ASSOC);
     } catch (PDOException $e) {
       echo $e;
     }
@@ -39,8 +43,8 @@ class EmployeeModel extends Model
         '{$employeeArray['postalCode']}',
         '{$employeeArray['phoneNumber']}');
       ";
-      $query = $this->db->connect()->prepare($request);
-      $query->execute();
+      $this->query = $this->db->connect()->prepare($request);
+      $this->query->execute();
       return true;
     } catch (PDOException $e) {
       return $e->getMessage();
@@ -70,8 +74,8 @@ class EmployeeModel extends Model
         '{$employeeArray['postal_code']}',
         '{$employeeArray['phone_number']}');
       ";
-      $query = $this->db->connect()->prepare($request);
-      $query->execute();
+      $this->query = $this->db->connect()->prepare($request);
+      $this->query->execute();
       return true;
     } catch (PDOException $e) {
       return $e->getMessage();
@@ -79,16 +83,14 @@ class EmployeeModel extends Model
 
 
 
-    //! Destruct to close connection
-
   }
 
   function getById(int $id)
   {
     try {
-      $query = $this->db->connect()->prepare("SELECT * FROM employee WHERE id = {$id};");
-      $query->execute();
-      $result = $query->fetch();
+      $this->query = $this->db->connect()->prepare("SELECT * FROM employee WHERE id = {$id};");
+      $this->query->execute();
+      $result = $this->query->fetch();
       return $result;
     } catch (PDOException $e) {
       return $e->getMessage();
@@ -113,8 +115,8 @@ class EmployeeModel extends Model
         phone_number = '{$employeeArray['phoneNumber']}'
       WHERE id = {$id};
       ";
-      $query = $this->db->connect()->prepare($request);
-      $query->execute();
+      $this->query = $this->db->connect()->prepare($request);
+      $this->query->execute();
       return true;
     } catch (PDOException $e) {
       return $e->getMessage();
@@ -124,9 +126,9 @@ class EmployeeModel extends Model
   function delete(int $id)
   {
     try {
-      $query = $this->db->connect()->prepare("DELETE FROM employee WHERE id = {$id};");
-      $query->execute();
-      if (($query->rowCount()) > 0) {
+      $this->query = $this->db->connect()->prepare("DELETE FROM employee WHERE id = {$id};");
+      $this->query->execute();
+      if (($this->query->rowCount()) > 0) {
         return true;
       } else {
         return false;

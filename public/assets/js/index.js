@@ -24,7 +24,7 @@ $("#jsGrid").jsGrid({
     loadData: function (data) {
       return $.ajax({
         type: "GET",
-        url: "/employee/",
+        url: "./employee/",
         data: data,
       });
     },
