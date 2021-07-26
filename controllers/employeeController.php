@@ -41,7 +41,7 @@ class EmployeeController extends Controller
           header('Location: ./employee');
         } else {
           $message = $result;
-          $messageType = 'error';
+          $messageType = 'danger';
           $this->view->message = $message;
           $this->view->messageType = $messageType;
         }
@@ -56,8 +56,8 @@ class EmployeeController extends Controller
     if (is_array($result)) {
       $this->view->employee = $result;
     } else {
-      $message =  $result;
-      $messageType = 'error';
+      $message =  'Id not found';
+      $messageType = 'danger';
       $this->view->message = $message;
       $this->view->messageType = $messageType;
     }
@@ -74,7 +74,7 @@ class EmployeeController extends Controller
         $messageType = 'success';
       } else {
         $message = $result;
-        $messageType = 'error';
+        $messageType = 'danger';
       }
       $this->view->message = $message;
       $this->view->messageType = $messageType;
