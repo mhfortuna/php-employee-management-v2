@@ -1,12 +1,3 @@
-<!-- // require_once('./library/sessionHelper.php');
-// checkExpiredSession();
-// if(!isset($_SESSION)){
-// header("Location : ../index.php");
-// }
-// echo "Creating employee OK";
-// echo isset($this->employee) ? $this->employee : "No employee"; -->
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,15 +7,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Employee Management</title>
 
-  <link rel="stylesheet" href="../../node_modules/bootstrap/dist/css/bootstrap.min.css">
-  <link href="../../public/assets/css/main.css" rel="stylesheet" />
-  <script src="../../node_modules/jquery/dist/jquery.min.js"></script>
+  <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <link href="../public/assets/css/main.css" rel="stylesheet" />
+  <script src="../node_modules/jquery/dist/jquery.min.js"></script>
 </head>
 
 <body>
   <header class="bg-light mb-4">
     <?php
-    require("views/header.php");
+    require_once VIEWS . '/header.php';
     ?>
   </header>
   <main class="container-xl mx-auto pb-90">
@@ -99,7 +90,7 @@
   </main>
   <footer class="fixed-bottom">
     <?php
-    require("views/footer.php");
+    require_once VIEWS . '/header.php';
     ?>
   </footer>
   <!-- <script src="public/assets/js/index.js"></script> -->
