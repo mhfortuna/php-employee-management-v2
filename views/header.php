@@ -1,6 +1,6 @@
 <div class="card-header d-flex align-items-center">
   <div class="d-flex mr-5">
-    <img class="mr-2" src="../../node_modules/bootstrap-icons/icons/file-earmark-person.svg" alt="" width="20" height="20" />
+    <img class="mr-2" src="<?php echo BASE_URL ?>/node_modules/bootstrap-icons/icons/file-earmark-person.svg" alt="" width="20" height="20" />
     <h6 class="m-0">Employees Management</h6>
   </div>
   <div class="d-flex">

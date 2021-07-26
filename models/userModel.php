@@ -2,13 +2,18 @@
 
 class UserModel extends Model
 {
+     function __destruct()
+     {
+          $this->query = null;
+     }
+
      function login()
      {
           try {
 
-               $query = $this->db->connect()->prepare("SELECT password FROM user WHERE email = '{$_POST['email']}'");
-               $query->execute();
-               $result = $query->fetch();
+               $this->query = $this->db->connect()->prepare("SELECT password FROM user WHERE email = '{$_POST['email']}'");
+               $this->query->execute();
+               $result = $this->query->fetch();
                if (!$result) {
                     unset($_POST);
                     return false;
