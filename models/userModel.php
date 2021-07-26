@@ -10,6 +10,13 @@ class UserModel extends Model
      function login()
      {
           try {
+               // We check if holidays table exists or not
+               $this->query = $this->db->connect()->prepare("SELECT 1 FROM user LIMIT 1");
+
+               if (!$this->query) {
+                    // Holiday does not exist, we create it dinamically
+                    require_once("./resources/createUser.php");
+               }
 
                $this->query = $this->db->connect()->prepare("SELECT password FROM user WHERE email = '{$_POST['email']}'");
                $this->query->execute();
