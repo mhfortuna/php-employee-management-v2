@@ -11,6 +11,7 @@ class UserController extends Controller
           if (!empty($_POST)) {
                $login = $this->model->login();
                if ($login) {
+                    SessionHelper::login();
                     header('Location: ' . BASE_URL . 'employee');
                } else {
                     $this->view->messageType = "error";
@@ -25,9 +26,10 @@ class UserController extends Controller
      public function logoutUser()
      {
           if (empty($_POST)) {
-               $this->view->messageType = "success";
-               $this->view->message = "Logout successfully";
-               $this->view->render('login');
+               SessionHelper::logout(false);
+               // $this->view->messageType = "success";
+               // $this->view->message = "Logout successfully";
+               // $this->view->render('login');
           } else {
                $this->loginUser();
           }
